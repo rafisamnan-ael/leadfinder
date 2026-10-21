@@ -1,0 +1,161 @@
+import { COUNTRIES } from "./query-engine";
+
+export { COUNTRIES };
+
+export const STATES_BY_COUNTRY: Record<string, string[]> = {
+  USA: [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
+    "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia",
+    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+    "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
+    "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
+    "New Hampshire", "New Jersey", "New Mexico", "New York",
+    "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
+    "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
+    "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+    "West Virginia", "Wisconsin", "Wyoming",
+  ],
+  Australia: [
+    "Australian Capital Territory",
+    "New South Wales",
+    "Northern Territory",
+    "Queensland",
+    "South Australia",
+    "Tasmania",
+    "Victoria",
+    "Western Australia",
+  ],
+};
+
+export const CITIES_BY_COUNTRY: Record<string, string[]> = {
+  USA: [
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+    "San Antonio", "San Diego", "Dallas", "Austin", "San Jose", "Jacksonville",
+    "Fort Worth", "Columbus", "Charlotte", "Indianapolis", "San Francisco",
+    "Seattle", "Denver", "Washington DC", "Boston", "Nashville", "Detroit",
+    "Portland", "Las Vegas", "Memphis", "Louisville", "Baltimore",
+    "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento",
+    "Kansas City", "Atlanta", "Omaha", "Colorado Springs", "Raleigh",
+    "Virginia Beach", "Miami", "Minneapolis", "Tampa", "New Orleans",
+    "Cleveland", "Honolulu", "Anaheim", "Aurora", "Santa Ana", "Riverside",
+    "Corpus Christi", "Lexington", "Henderson", "Stockton", "Saint Paul",
+    "Cincinnati", "Saint Louis", "Pittsburgh", "Greensboro", "Lincoln",
+    "Anchorage", "Plano", "Orlando", "Irvine", "Newark", "Durham",
+    "Chula Vista", "Toledo", "Fort Wayne", "Saint Petersburg", "Laredo",
+    "Jersey City", "Chandler", "Madison", "Lubbock", "Scottsdale",
+    "Reno", "Buffalo", "Gilbert", "Glendale", "North Las Vegas",
+    "Winston-Salem", "Chesapeake", "Norfolk", "Fremont", "Garland",
+    "Irving", "Hialeah", "Richmond", "Boise", "Spokane", "Baton Rouge",
+    "Tacoma", "San Bernardino", "Modesto", "Fontana", "Des Moines",
+    "Moreno Valley", "Santa Clarita", "Fayetteville", "Birmingham",
+    "Oxnard", "Rochester", "Port Saint Lucie", "Grand Rapids", "Huntsville",
+    "Salt Lake City", "Frisco", "Yonkers", "Amarillo", "Glendale",
+    "Huntington Beach", "McKinney", "Montgomery", "Augusta", "Aurora",
+    "Akron", "Little Rock", "Tempe", "Columbus", "Overland Park",
+    "Grand Prairie", "Tallahassee", "Cape Coral", "Mobile", "Knoxville",
+    "Shreveport", "Worcester", "Ontario", "Vancouver", "Sioux Falls",
+    "Chattanooga", "Brownsville", "Fort Lauderdale", "Providence",
+    "Newport News", "Rancho Cucamonga", "Santa Rosa", "Peoria",
+    "Oceanside", "Elk Grove", "Salem", "Pembroke Pines", "Eugene",
+    "Garden Grove", "Cary", "Fort Collins", "Corona", "Springfield",
+    "Jackson", "Alexandria", "Hayward", "Clarksville", "Lakewood",
+    "Lancaster", "Salinas", "Palmdale", "Hollywood", "Macon",
+    "Kansas City", "Sunnyvale", "Pomona", "Killeen", "Escondido",
+    "Pasadena", "Naperville", "Bellevue", "Joliet", "Murfreesboro",
+    "Midland", "Rockford", "Paterson", "Savannah", "Bridgeport",
+    "Torrance", "McAllen", "Syracuse", "Surprise", "Denton", "Roseville",
+    "Thornton", "Miramar", "Pasadena", "Mesquite", "Olathe", "Dayton",
+    "Carrollton", "Waco", "Orange", "Fullerton", "Charleston",
+    "West Valley City", "Visalia", "Hampton", "Gainesville", "Warren",
+    "Coral Springs", "Cedar Rapids", "Round Rock", "Sterling Heights",
+    "Kent", "Columbia", "Santa Clara", "New Haven", "Stamford",
+    "Concord", "Elizabeth", "Athens", "Thousand Oaks", "Lafayette",
+    "Simi Valley", "Topeka", "Norman", "Fargo", "Wilmington", "Abilene",
+    "Odessa", "Columbia", "Pearland", "Victorville", "Hartford",
+    "Vallejo", "Allentown", "Berkeley", "Richardson", "Arvada",
+    "Ann Arbor", "Rochester", "Cambridge", "Sugar Land", "Lansing",
+    "Evansville", "College Station", "Fairfield", "Clearwater",
+    "Beaumont", "Independence", "Provo", "West Jordan", "Murrieta",
+    "Palm Bay", "El Monte", "Carlsbad", "North Charleston", "Temecula",
+    "Clovis", "Springfield", "Meridian", "Westminster", "Costa Mesa",
+    "High Point", "Manchester", "Pueblo", "Lakeland", "Pompano Beach",
+    "West Palm Beach", "Antioch", "Everett", "Downey", "Lowell",
+    "Centennial", "Elgin", "Richmond", "Peoria", "Broken Arrow",
+    "Miami Gardens", "Billings", "Jurupa Valley", "Sandy Springs",
+    "Gresham", "Lewisville", "Hillsboro", "Ventura", "Greeley",
+    "Inglewood", "Waterbury", "League City", "Santa Maria", "Tyler",
+    "Davie", "Lakewood", "Daly City", "Boulder", "Allen", "West Covina",
+    "Sparks", "Wichita Falls", "Cedar Hill", "Carrollton", "Columbia",
+    "San Mateo", "Norwalk", "Fair Lawn", "Burbank", "Green Bay",
+    "Broken Arrow", "Berwyn", "El Cajon", "Berkley", "San Leandro",
+    "Norwalk", "Compton", "League City", "Chico", "Quincy", "Edinburg",
+    "Longmont", "Narragansett", "Albany", "Waltham", "Alhambra",
+    "Kirkland", "Trenton", "Olympia", "Racine", "Hoover", "Camarillo",
+    "Wilmington", "Edinburg", "Renton", "Boca Raton", "Yuma", "Scottsdale",
+    "North Hempstead", "Tracy", "San Ramon", "Merced", "Chino",
+    "Reno", "Buffalo", "Orem", "Bloomington", "Rialto", "Cranston",
+    "Pawtucket", "Portsmouth", "Gainesville", "Columbus", "Wichita",
+    "Davenport", "New Bedford", "Lakewood", "Santa Barbara", "Baton Rouge",
+    "Missoula", "Murfreesboro", "College Station", "Dearborn",
+    "Skokie", "San Angelo", "Greenwich", "Troy", "Long Beach",
+    "Miami Beach", "Bellingham", "Redding", "Cocoa", "Reno",
+    "Lynn", "New Rochelle", "Covina", "Cranston", "Nashua", "Tigard",
+    "Cedar Rapids", "Sparks", "Waukegan", "Champaign", "Danbury",
+    "Edison", "Springfield", "Lawton", "Tulsa", "Meriden", "Caldwell",
+    "Texas City", "Hemet", "Boulder", "Cary", "Ocoee", "Avondale",
+    "Blacksburg", "Perris", "Canton", "Silver Spring", "Broomfield",
+    "Wausau", "Mesa", "Indio", "Allen", "Rio Rancho", "Boca Raton",
+    "Albany", "Kenosha", "Johnstown", "Wilmington", "Delray Beach",
+    "Gastonia", "Bismarck", "Kalamazoo", "Port Orange", "Longview",
+    "Baytown", "Coconut Creek", "Plantation", "Bend", "Kissimmee",
+    "Trenton", "Mansfield", "Coral Gables", "Fort Smith", "Idaho Falls",
+    "Wyoming", "Thousand Oaks", "Mesa", "West New York", "Lawrence",
+    "Hialeah Gardens", "Roswell", "San Marcos", "Beloit", "Trenton",
+    "Fayetteville", "Asheville", "Hoboken", "Encinitas", "New Braunfels",
+    "Arlington", "Reno", "Renton", "Lansing", "Boca Raton", "Yonkers",
+  ],
+  Australia: [
+    "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Canberra",
+    "Gold Coast", "Newcastle", "Wollongong", "Hobart", "Geelong",
+    "Townsville", "Cairns", "Darwin", "Toowoomba", "Ballarat", "Bendigo",
+    "Launceston", "Mackay", "Rockhampton", "Bunbury", "Bundaberg",
+    "Wagga Wagga", "Hervey Bay", "Mildura", "Shepparton", "Tamworth",
+    "Orange", "Dubbo", "Blacktown", "Parramatta", "Newtown", "Fremantle",
+    "Perth CBD", "Surfers Paradise", "Alice Springs", "Kalgoorlie",
+    "Mount Gambier", "Whyalla", "Alice Springs", "Broken Hill", "Karratha",
+  ],
+};
+
+/** Dedupe + sort helper (some entries repeat intentionally in source lists). */
+function uniq(values: string[]): string[] {
+  return Array.from(new Set(values.filter(Boolean)));
+}
+
+export function getStates(country: string): string[] {
+  return STATES_BY_COUNTRY[country] ?? [];
+}
+
+export function getCities(country: string): string[] {
+  return uniq(CITIES_BY_COUNTRY[country] ?? []).sort((a, b) =>
+    a.localeCompare(b)
+  );
+}
+
+export const INDUSTRIES = [
+  "Plumbing",
+  "Construction",
+  "Roofing",
+  "Real Estate",
+  "Dental",
+  "Healthcare",
+  "Law Firms",
+  "Cleaning",
+  "Landscaping",
+  "HVAC",
+  "Electricians",
+  "E-commerce",
+  "Restaurants",
+  "Agencies",
+  "SaaS",
+  "Startups",
+] as const;

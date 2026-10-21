@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  businessName String
+  website      String?
+  founderName  String?
+  jobTitle     String?
+  industry     String?
+  country      String?
+  state        String?
+  city         String?
+  email        String?
+  phone        String?
+  linkedinUrl  String?
+  sourceUrl    String?
+  notes        String?
+  tags         String   @default("")
+  status       String   @default("New")
+  favorite     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  lists        LeadList[]
+
+  @@index([status])
+  @@index([country])
+  @@index([industry])
+  @@index([favorite])
+}
+
+model SearchTemplate {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  category    String
+  template    String
+  engine      String   @default("google")
+  sources     String   @default("")
+  isSystem    Boolean  @default(false)
+  isFavorite  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+}
+
+model SearchHistory {
+  id           String   @id @default(cuid())
+  query        String
+  engine       String   @default("google")
+  templateId   String?
+  templateName String?
+  category     String?
+  label        String?
+  filters      String   @default("{}")
+  saved        Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([saved])
+}
+
+model LeadList {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  leads     Lead[]
+}
+
+model Setting {
+  key   String @id
+  value String
+}
