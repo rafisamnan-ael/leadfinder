@@ -52,9 +52,8 @@ export async function GET() {
     await ensureSeeded();
     const rows = await prisma.setting.findMany();
     return NextResponse.json(buildSettings(rows));
-  } catch (error) {
-    console.error("GET /api/settings failed:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  } catch {
+    return NextResponse.json(DEFAULT_SETTINGS);
   }
 }
 

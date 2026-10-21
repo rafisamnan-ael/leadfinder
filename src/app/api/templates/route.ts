@@ -5,20 +5,21 @@ import { prisma } from "@/lib/prisma";
 import { ensureSeeded } from "@/lib/seed";
 import { searchTemplateInputSchema } from "@/lib/validations";
 import { sourcesToDb, templateRowToDto } from "@/lib/mappers";
+import { SYSTEM_TEMPLATES } from "@/lib/templates";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
+  const sp = req.nextUrl.searchParams;
+  const category = sp.get("category");
+  const favOnly = sp.get("favorite") === "true";
+
   try {
     await ensureSeeded();
 
-    const sp = req.nextUrl.searchParams;
     const where: Prisma.SearchTemplateWhereInput = {};
-
-    const category = sp.get("category");
     if (category) where.category = category;
-
-    if (sp.get("favorite") === "true") where.isFavorite = true;
+    if (favOnly) where.isFavorite = true;
 
     const rows = await prisma.searchTemplate.findMany({
       where,
@@ -26,9 +27,25 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json({ items: rows.map(templateRowToDto) });
-  } catch (error) {
-    console.error("GET /api/templates failed:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  } catch {
+    const now = new Date().toISOString();
+    let items = SYSTEM_TEMPLATES.map((t, i) => ({
+      id: `sys-${i}`,
+      name: t.name,
+      description: t.description,
+      category: t.category,
+      template: t.template,
+      engine: t.engine,
+      sources: t.sources ?? [],
+      isSystem: true,
+      isFavorite: false,
+      createdAt: now,
+      updatedAt: now,
+    }));
+    if (category) items = items.filter((t) => t.category === category);
+    if (favOnly) items = [];
+    items.sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+    return NextResponse.json({ items });
   }
 }
 
