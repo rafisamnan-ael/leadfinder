@@ -305,27 +305,27 @@ export function buildGoogleQuery(template: string, f: QueryFilters): string {
 }
 
 /**
- * Build a Google Maps query from a phrase pattern such as
- * "{industry} in {city}, {state}, {country}". Empty filters are dropped
- * with their separators/prepositions so the phrase stays natural.
+ * Build a Google Maps query from a phrase pattern.
+ * Supports: {industry} {city} {state} {country}
  */
 export function buildMapsQuery(pattern: string, f: QueryFilters): string {
   let s = pattern;
 
-  // Drop placeholders (and prepositions tied to them) when empty.
+  // Substitute {state} and {country} specifically to fix Maps queries
+  s = s.replace(/\{state\}/g, sanitizeTerm(f.state));
+  s = s.replace(/\{country\}/g, sanitizeTerm(f.country));
+
+  // Drop placeholders and prepositions tied to them when empty
   const dropIfEmpty = (key: string, value: string) => {
     if (value) return;
     s = s.replace(new RegExp(`\\{${key}\\}`, "g"), "");
   };
   dropIfEmpty("industry", sanitizeTerm(f.industry));
   dropIfEmpty("city", sanitizeTerm(f.city));
-  dropIfEmpty("state", sanitizeTerm(f.state));
-  dropIfEmpty("country", sanitizeTerm(f.country));
-  dropIfEmpty("year", "");
 
   s = substitute(s, f);
   s = s
-    .split(",")
+    .split(/[,|]/) // Handle commas or pipes as separators
     .map((seg) => seg.trim())
     .filter((seg) => seg.length > 0)
     .map((seg) => seg.replace(/^\s*(?:in|near|at)\s+/i, ""))

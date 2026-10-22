@@ -145,16 +145,16 @@ export function FilterPanel({
           />
         </Field>
 
-        <Field label="Industry" htmlFor="f-industry">
+        <Field label="Industry/Service" hint="Type to search or add your own.">
           <Combobox
             id="f-industry"
             options={[...INDUSTRIES]}
             value={filters.industry}
             onChange={(v) => onPatch({ industry: v })}
             allowCustom
-            customPlaceholder="Type a custom industry…"
-            placeholder="Select industry…"
-            emptyText="No match — type a custom industry."
+            customPlaceholder="Type a custom industry or skill…"
+            placeholder="Select or type service…"
+            emptyText="No match — type a custom service."
           />
         </Field>
 
