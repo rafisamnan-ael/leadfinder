@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import { DashboardView } from "@/components/dashboard/dashboard-view";
+import { SearchWorkspace } from "@/components/search/search-workspace";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Search",
 };
 
-export default function DashboardPage() {
-  return <DashboardView />;
+export default function SearchPage() {
+  return <SearchWorkspace />;
 }
