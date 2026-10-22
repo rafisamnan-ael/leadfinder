@@ -37,24 +37,40 @@ export const DATE_RANGE_LABELS: Record<Exclude<DateRange, "">, string> = {
   year: "Past year",
 };
 
-export type SearchEngine = "google" | "maps";
+export type SourceId = "google" | "maps" | "linkedin" | "facebook" | "instagram" | "custom";
 
-export type SourceId =
-  | "google"
-  | "google-maps"
-  | "linkedin-profiles"
-  | "company-websites"
-  | "buying-intent"
-  | "startup-founders";
-
-export const SEARCH_SOURCES: { id: SourceId; label: string; icon: string }[] = [
-  { id: "google", label: "Google", icon: "search" },
-  { id: "google-maps", label: "Google Maps", icon: "map" },
-  { id: "linkedin-profiles", label: "LinkedIn Profiles", icon: "linkedin" },
-  { id: "company-websites", label: "Company Websites", icon: "globe" },
-  { id: "buying-intent", label: "Buying Intent", icon: "intent" },
-  { id: "startup-founders", label: "Startup Founders", icon: "rocket" },
+export const SEARCH_SOURCES: { id: SourceId; label: string; domain: string }[] = [
+  { id: "google", label: "Google", domain: "google.com" },
+  { id: "maps", label: "Google Maps", domain: "maps.google.com" },
+  { id: "linkedin", label: "LinkedIn", domain: "linkedin.com" },
+  { id: "facebook", label: "Facebook", domain: "facebook.com" },
+  { id: "instagram", label: "Instagram", domain: "instagram.com" },
+  { id: "custom", label: "Custom Domain", domain: "" },
 ];
+
+/**
+ * Dynamically builds a search query based on selected source and filters.
+ */
+export function buildDynamicQuery(
+  source: SourceId,
+  customDomain: string,
+  f: QueryFilters
+): string {
+  const industry = sanitizeTerm(f.industry);
+  const role = resolveRoles(f.roles)[0] || "";
+  const location = [f.city, f.state, f.country].filter(Boolean).join(" ");
+  
+  const domain = source === "custom" ? customDomain : SEARCH_SOURCES.find(s => s.id === source)?.domain || "";
+
+  let query = "";
+  
+  if (domain) query += `site:${domain} `;
+  if (role) query += `"${role}" `;
+  if (industry) query += `"${industry}" `;
+  if (location) query += `"${location}" `;
+
+  return sanitizeQuery(query);
+}
 
 export type CategoryId =
   | "linkedin-profiles"
